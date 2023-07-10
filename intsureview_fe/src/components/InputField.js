@@ -5,6 +5,8 @@ const InputField = ({
   value,
   onChange,
   required,
+  min,
+  max
 }) => (
   <fieldset>
     <label htmlFor={id}>{label}</label>
@@ -14,6 +16,8 @@ const InputField = ({
       value={value}
       onChange={onChange}
       required={required}
+      min={min}
+      max={max}
     />
   </fieldset>
 );

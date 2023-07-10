@@ -36,4 +36,15 @@ describe("InputField", () => {
       })
     );
   });
+
+  test("renders the input element when type is 'number' correctly", () => {
+    const testType = 'number'
+    const min = 0;
+    const max = 10;
+    render(<InputField label={label} id={id} type={testType} min={min} max={max} />);
+    const inputElement = screen.getByLabelText(label);
+    expect(inputElement).toBeInTheDocument();
+    expect(inputElement).toHaveAttribute('type', testType);
+    expect(inputElement).toHaveAttribute('id', id);
+  });
 });
