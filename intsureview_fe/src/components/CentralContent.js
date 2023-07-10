@@ -4,6 +4,8 @@ import FormTitle from "./FormTitle";
 import TextAreaField from "./TextAreaField";
 import SelectField from "./SelectField";
 import Button from "./Button";
+import validateForm from "./validateForm";
+import SuccessOrFailure from "./SuccessOrFailure";
 
 const CentralContent = () => {
   const [recipeName, setRecipeName] = useState("");
@@ -11,6 +13,34 @@ const CentralContent = () => {
   const [recipe, setRecipe] = useState("");
   const [rating, setRating] = useState("");
   const [notes, setNotes] = useState("");
+  const [errors, setErrors] = useState({});
+  const [submissionStatus, setSubmissionStatus] = useState(null);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = {
+      recipeName,
+      makeAgain,
+      recipe,
+      rating,
+      notes,
+    };
+    const validationErrors = validateForm(formData);
+    if (Object.keys(validationErrors).length === 0) {
+      //API POST request will go here
+      setSubmissionStatus("success");
+            // Reset form fields and errors
+            setRecipeName("");
+            setMakeAgain("");
+            setRecipe("");
+            setRating("");
+            setNotes("");
+            setErrors({});
+    } else {
+      setErrors(validationErrors);
+      setSubmissionStatus("failure");
+    }
+  };
 
   return (
     <main data-testid="central-content">
@@ -22,6 +52,7 @@ const CentralContent = () => {
           value={recipeName}
           onChange={(e) => setRecipeName(e.target.value)}
           required
+          error={errors.recipeName}
         />
 
         <SelectField
@@ -31,6 +62,7 @@ const CentralContent = () => {
           onChange={(e) => setMakeAgain(e.target.value)}
           required
           options={["Yes", "No"]}
+          error={errors.makeAgain}
         />
 
         <TextAreaField
@@ -39,6 +71,7 @@ const CentralContent = () => {
           value={recipe}
           onChange={(e) => setRecipe(e.target.value)}
           required
+          error={errors.recipe}
         />
 
         <InputField
@@ -50,6 +83,7 @@ const CentralContent = () => {
           type="number"
           min={0}
           max={10}
+          error={errors.rating}
         />
 
         <TextAreaField
@@ -58,8 +92,22 @@ const CentralContent = () => {
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
           required
+          error={errors.notes}
         />
-        <Button type="submit">Submit Test Recipe</Button>
+        <Button type="submit" onClick={handleSubmit}>
+          Submit Test Recipe
+        </Button>
+
+        {submissionStatus === "success" && (
+          <SuccessOrFailure
+            type="success"
+            message="Form submitted successfully! You may submit another."
+          />
+        )}
+
+        {submissionStatus === "failure" && (
+          <SuccessOrFailure type="failure" message="Form submission failed." />
+        )}
       </form>
     </main>
   );
