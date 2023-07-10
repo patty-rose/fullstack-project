@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import InputField from "./InputField";
 import FormTitle from "./FormTitle";
 import TextAreaField from "./TextAreaField";
+import SelectField from "./SelectField";
 
 const CentralContent = () => {
   const [recipeName, setRecipeName] = useState("");
@@ -29,6 +30,15 @@ const CentralContent = () => {
         value={recipeName}
         onChange={(e) => setRecipeName(e.target.value)}
         required
+      />
+
+      <SelectField
+        label="Would you make this again?"
+        id="makeAgain"
+        value={makeAgain}
+        onChange={(e) => setMakeAgain(e.target.value)}
+        required
+        options={["Yes", "No"]}
       />
 
       <TextAreaField
