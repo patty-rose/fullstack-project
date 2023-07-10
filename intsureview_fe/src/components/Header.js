@@ -1,6 +1,6 @@
 function Header() {
   return (
-    <header>
+    <header data-testid='header'>
       Brooklyn Granary & Mill
     </header>
   );
