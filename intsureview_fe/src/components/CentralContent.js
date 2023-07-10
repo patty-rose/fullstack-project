@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import InputField from "./InputField";
+import FormTitle from "./FormTitle";
 
 const CentralContent = () => {
   const [recipeName, setRecipeName] = useState("");
@@ -20,6 +21,7 @@ const CentralContent = () => {
       -text area for notes
       -submit button
       */}
+      <FormTitle text="Add a Test Recipe:" />
       <InputField
         label="Recipe Name"
         id="recipeName"
