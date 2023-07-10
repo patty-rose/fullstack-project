@@ -20,4 +20,20 @@ describe("InputField", () => {
     expect(inputElement).toHaveAttribute('type', 'text');
     expect(inputElement).toHaveAttribute('id', id);
   });
+
+  test("calls the onChange handler when the value changes", () => {
+    const onChange = jest.fn();
+    const newValue = 'new value';
+    render(
+      <InputField label={label} id={id} onChange={onChange} />
+    );
+    const inputElement = screen.getByLabelText(label);
+    fireEvent.change(inputElement, { target: { value: newValue } });
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        target: expect.objectContaining({ value: newValue }),
+      })
+    );
+  });
 });
