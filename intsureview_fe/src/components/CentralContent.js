@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import InputField from "./InputField";
 
 const CentralContent = () => {
+  const [recipeName, setRecipeName] = useState("");
   return (
     <main data-testid="central-content">
       {/* 
@@ -15,6 +16,13 @@ const CentralContent = () => {
       -text area for notes
       -submit button
       */}
+      <InputField
+        label="Recipe Name"
+        id="recipeName"
+        value={recipeName}
+        onChange={(e) => setRecipeName(e.target.value)}
+        required
+      />
     </main>
   );
 };
