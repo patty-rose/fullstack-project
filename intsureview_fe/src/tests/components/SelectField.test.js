@@ -47,4 +47,13 @@ describe("SelectField", () => {
       })
     );
   });
+
+  test("renders an error message if error prop is provided", () => {
+    const error = "test error";
+    render(
+      <SelectField label={label} id={id} options={options} error={error} />
+    );
+    const errorElement = screen.getByText(error);
+    expect(errorElement).toBeInTheDocument();
+  });
 });

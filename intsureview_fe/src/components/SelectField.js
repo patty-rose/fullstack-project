@@ -5,6 +5,7 @@ const SelectField = ({
   onChange,
   required,
   options,
+  error
 }) => (
   <fieldset>
     <label htmlFor={id}>{label}</label>
@@ -16,6 +17,7 @@ const SelectField = ({
         </option>
       ))}
     </select>
+    {error && <p className="error-message">{error}</p>}
   </fieldset>
 );
 

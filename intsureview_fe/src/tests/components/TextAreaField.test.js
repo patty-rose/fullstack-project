@@ -41,4 +41,13 @@ describe("TextAreaField", () => {
       })
     );
   });
+
+  test("renders an error message if error prop is provided", () => {
+    const error = "test error";
+    render(
+      <TextAreaField label={label} id={id} error={error} />
+    );
+    const errorElement = screen.getByText(error);
+    expect(errorElement).toBeInTheDocument();
+  });
 });

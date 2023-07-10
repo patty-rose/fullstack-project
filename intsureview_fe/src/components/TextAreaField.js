@@ -1,6 +1,6 @@
 import React from "react";
 
-const TextAreaField = ({ label, id, value, onChange }) => (
+const TextAreaField = ({ label, id, value, onChange, error}) => (
   <fieldset>
     <label htmlFor={id}>{label}</label>
     <textarea
@@ -8,6 +8,7 @@ const TextAreaField = ({ label, id, value, onChange }) => (
       value={value}
       onChange={onChange}
     ></textarea>
+    {error && <p className="error-message">{error}</p>}
   </fieldset>
 );
 

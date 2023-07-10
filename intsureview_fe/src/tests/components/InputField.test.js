@@ -47,4 +47,11 @@ describe("InputField", () => {
     expect(inputElement).toHaveAttribute('type', testType);
     expect(inputElement).toHaveAttribute('id', id);
   });
+
+  test("renders an error message if error prop is provided", () => {
+    const error = 'test error';
+    render(<InputField label={label} id={id} error={error} />);
+    const errorElement = screen.getByText(error);
+    expect(errorElement).toBeInTheDocument();
+  });
 });

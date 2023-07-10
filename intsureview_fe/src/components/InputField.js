@@ -6,7 +6,8 @@ const InputField = ({
   onChange,
   required,
   min,
-  max
+  max,
+  error
 }) => (
   <fieldset>
     <label htmlFor={id}>{label}</label>
@@ -19,6 +20,7 @@ const InputField = ({
       min={min}
       max={max}
     />
+    {error && <p className="error-message">{error}</p>}
   </fieldset>
 );
 
