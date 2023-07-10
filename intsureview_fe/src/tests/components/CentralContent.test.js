@@ -39,7 +39,7 @@ describe("CentralContent", () => {
     expect(screen.getByText("Notes is required")).toBeInTheDocument();
   });
 
-  test("displays success message for valid form submission", () => {
+  test("handles form submission with valid data and displays success message", () => {
     render(<CentralContent />);
 
     const submitButton = screen.getByRole("button", {

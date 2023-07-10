@@ -27,15 +27,41 @@ const CentralContent = () => {
     };
     const validationErrors = validateForm(formData);
     if (Object.keys(validationErrors).length === 0) {
-      //API POST request will go here
-      setSubmissionStatus("success");
-            // Reset form fields and errors
+      const formSubmitData = {
+        recipe_name: recipeName,
+        make_again: makeAgain,
+        recipe: recipe,
+        rating: rating,
+        notes: notes,
+      };
+      fetch("http://localhost:8000/test-recipes/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formSubmitData),
+      })
+        .then((response) => {
+          if (response.ok) {
+            setSubmissionStatus("success");
             setRecipeName("");
             setMakeAgain("");
             setRecipe("");
             setRating("");
             setNotes("");
             setErrors({});
+          } else {
+            setSubmissionStatus("failure");
+            return response.json();
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            general: `${error}`,
+          }));
+        });
     } else {
       setErrors(validationErrors);
       setSubmissionStatus("failure");
@@ -106,7 +132,7 @@ const CentralContent = () => {
         )}
 
         {submissionStatus === "failure" && (
-          <SuccessOrFailure type="failure" message="Form submission failed." />
+          <SuccessOrFailure type="failure" message={`Form submission failed. ${errors.general || ""}`} />
         )}
       </form>
     </main>
