@@ -11,6 +11,7 @@ const CentralContent = () => {
   const [recipe, setRecipe] = useState("");
   const [rating, setRating] = useState("");
   const [notes, setNotes] = useState("");
+
   return (
     <main data-testid="central-content">
       <FormTitle text="Add a Test Recipe:" />
