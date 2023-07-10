@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import InputField from "./InputField";
 import FormTitle from "./FormTitle";
+import TextAreaField from "./TextAreaField";
 
 const CentralContent = () => {
   const [recipeName, setRecipeName] = useState("");
@@ -30,6 +31,14 @@ const CentralContent = () => {
         required
       />
 
+      <TextAreaField
+        label="Recipe"
+        id="recipe"
+        value={recipe}
+        onChange={(e) => setRecipe(e.target.value)}
+        required
+      />
+
       <InputField
         label="Rating 0-10"
         id="rating"
@@ -39,6 +48,14 @@ const CentralContent = () => {
         type="number"
         min={0}
         max={10}
+      />
+
+      <TextAreaField
+        label="Notes"
+        id="notes"
+        value={notes}
+        onChange={(e) => setNotes(e.target.value)}
+        required
       />
     </main>
   );
