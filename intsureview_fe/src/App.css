@@ -28,6 +28,15 @@
   color: #61dafb;
 }
 
+.error-message,
+.failure {
+  color:red;
+}
+
+.success {
+  color:green;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
